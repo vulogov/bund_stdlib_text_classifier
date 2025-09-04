@@ -1,5 +1,5 @@
 SOURCES=$(wildcard src/*.rs)
-TESTS=$(wildcard test/*.rs)
+TESTS=$(wildcard tests/*.rs)
 
 
 all: $(SOURCES) Makefile
@@ -15,3 +15,7 @@ test: $(TESTS)
 clean:
 	cargo clean
 	cargo update
+
+commit:
+	aic -ac
+	git push

@@ -6,5 +6,7 @@ edition = "2024"
 [dependencies]
 bundcore = "0.4.0"
 easy-error = "1.0.0"
+growable-bloom-filter = "2.1.1"
 lazy_static = "1.5.0"
+lindera = "1.1.1"
 rust_dynamic = "0.48.0"

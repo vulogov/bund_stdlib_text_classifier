@@ -2,6 +2,8 @@ use easy_error::{Error};
 
 use bundcore::bundcore::Bund;
 
+pub mod classifier_filter;
+
 pub fn init_lib(vm: &Bund) -> Result<&Bund, Error> {
     Ok(vm)
 }
