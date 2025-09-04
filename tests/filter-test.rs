@@ -18,11 +18,21 @@ mod tests {
         filter.add("test");
         assert_eq!(filter.add("test"), false);
     }
+
     #[test]
     fn test_filter_to_string() {
         let mut filter = ClassifierFilter::new();
         filter.add("test");
         filter.add("test2");
         assert_eq!(filter.to_string(), "test2 test");
+    }
+
+    #[test]
+    fn test_filter_tokenize() {
+        let mut filter = ClassifierFilter::new();
+        assert_eq!(
+            filter.tokenize("Thé quick (\"brown\") fox can't jump 32.3 feet, right? Brr, it's 29.3°F!"),
+            16
+        );
     }
 }

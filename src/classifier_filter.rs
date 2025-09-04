@@ -1,5 +1,6 @@
 use std::collections::HashSet;
 use growable_bloom_filter::GrowableBloom;
+use charabia::Tokenize;
 
 #[derive(Clone, Debug)]
 pub struct ClassifierFilter {
@@ -28,5 +29,15 @@ impl ClassifierFilter {
             res = res + &format!("{} ", t).to_string();
         }
         res.trim().to_string()
+    }
+
+    pub fn tokenize<'a, N: AsRef<str> + std::hash::Hash  + ToString + std::fmt::Display + Tokenize<'a>>(&mut self, token: N) -> usize {
+        let tokens = token.tokenize();
+        for t in tokens {
+            if t.is_word() {
+                let _ = self.add(&t.lemma());
+            }
+        }
+        self.words.len()
     }
 }
