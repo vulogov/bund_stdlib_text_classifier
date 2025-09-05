@@ -1,11 +1,26 @@
 use easy_error::{Error};
+use lazy_static::lazy_static;
+use std::sync::Mutex;
 
 use bundcore::bundcore::Bund;
+use crate::classifiers::Classifiers;
 
 pub mod classifier_filter;
 pub mod topic_classifier;
+pub mod classifiers;
+pub mod bund_interface;
 
-pub fn init_lib(vm: &Bund) -> Result<&Bund, Error> {
+use crate::bund_interface::*;
+
+lazy_static! {
+    pub static ref TEXTCLASSIFIERS: Mutex<Classifiers> = {
+        let e: Mutex<Classifiers> = Mutex::new(Classifiers::new());
+        e
+    };
+}
+
+pub fn init_lib(vm: &mut Bund) -> Result<&Bund, Error> {
+    let _ = vm.vm.register_inline("textclassifier.new".to_string(), textclassifier_new);
     Ok(vm)
 }
 

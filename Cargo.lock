@@ -191,7 +191,9 @@ dependencies = [
  "easy-error",
  "growable-bloom-filter",
  "lazy_static",
+ "log",
  "rust_dynamic",
+ "rust_multistackvm",
 ]
 
 [[package]]
