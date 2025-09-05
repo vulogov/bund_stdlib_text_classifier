@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+bayesic = "0.1.1"
 bundcore = "0.4.0"
 charabia = "0.9.7"
 easy-error = "1.0.0"

@@ -31,6 +31,14 @@ impl ClassifierFilter {
         res.trim().to_string()
     }
 
+    pub fn to_vec(&mut self) -> Vec<String> {
+        let mut res = Vec::<String>::new();
+        for t in self.words.iter() {
+            res.push(t.to_string());
+        }
+        res
+    }
+
     pub fn tokenize<'a, N: AsRef<str> + std::hash::Hash  + ToString + std::fmt::Display + Tokenize<'a>>(&mut self, token: N) -> usize {
         let tokens = token.tokenize();
         for t in tokens {
