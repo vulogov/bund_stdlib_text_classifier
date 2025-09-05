@@ -24,9 +24,18 @@ impl TopicClassifier {
         }
     }
 
-    pub fn train(&mut self, topic: String, data: String) {
+    pub fn train(&mut self, topic: String, data: String) -> usize {
         let cf = self.filter.entry(topic).or_insert(ClassifierFilter::new());
-        cf.tokenize(data.as_str());
+        cf.tokenize(data.as_str())
+    }
+
+    pub fn train_from_file(&mut self, topic: String, fname: String) -> usize {
+        match get_file_from_relative_file(fname) {
+            Some(data) => {
+                self.train(topic, data)
+            }
+            None => { 0 }
+        }
     }
 
     pub fn finish(&mut self) {
