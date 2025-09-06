@@ -8,7 +8,7 @@ mod tests {
 
 
     #[test]
-    fn test_filter_get_classifier_train_from_file_and_guess_rust() {
+    fn test_get_classifier_train_from_file_and_guess_rust() {
         let mut c = Classifiers::new();
         let tc = c.classifier("TEST".to_string());
         tc.train_from_file("tolstoy".to_string(), "./tests/tolstoy.txt".to_string());
@@ -21,7 +21,7 @@ mod tests {
     }
 
     #[test]
-    fn test_filter_get_classifier_train_from_file_and_guess_rust_global() {
+    fn test_get_classifier_train_from_file_and_guess_rust_global() {
         let mut c = TEXTCLASSIFIERS.lock().unwrap();
         let tc = c.classifier("TEST".to_string());
         tc.train_from_file("tolstoy".to_string(), "./tests/tolstoy.txt".to_string());

@@ -7,7 +7,7 @@ mod tests {
 
 
     #[test]
-    fn test_filter_train_and_guess() {
+    fn test_topic_train_and_guess() {
         let mut tc = TopicClassifier::new();
         tc.train("water".to_string(), "ocean river bog lake".to_string());
         tc.train("land".to_string(), "hill mountain road field".to_string());
@@ -17,7 +17,7 @@ mod tests {
     }
 
     #[test]
-    fn test_filter_train_from_file_and_guess_rust() {
+    fn test_topic_train_from_file_and_guess_rust() {
         let mut tc = TopicClassifier::new();
         tc.train_from_file("tolstoy".to_string(), "./tests/tolstoy.txt".to_string());
         tc.train_from_file("kant".to_string(), "./tests/kant.txt".to_string());
@@ -29,7 +29,7 @@ mod tests {
     }
 
     #[test]
-    fn test_filter_train_from_file_and_guess_astronomy() {
+    fn test_topic_train_from_file_and_guess_astronomy() {
         let mut tc = TopicClassifier::new();
         tc.train_from_file("tolstoy".to_string(), "./tests/tolstoy.txt".to_string());
         tc.train_from_file("kant".to_string(), "./tests/kant.txt".to_string());

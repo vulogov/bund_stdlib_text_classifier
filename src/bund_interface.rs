@@ -35,6 +35,7 @@ pub fn textclassifier_new(vm: &mut VM) -> std::result::Result<&mut VM, Error> {
     }
     let _ = c.classifier(cname.clone());
     drop(c);
+    vm.stack.push(Value::from_string(cname.clone()));
     Ok(vm)
 }
 

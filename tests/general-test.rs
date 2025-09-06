@@ -8,7 +8,7 @@ mod tests {
 
     #[test]
     fn test_library1() {
-        let bund = Bund::new();
-        let _ = init_lib(&bund);
+        let mut bund = Bund::new();
+        let _ = init_lib(&mut bund);
     }
 }
