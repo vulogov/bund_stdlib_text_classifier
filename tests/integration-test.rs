@@ -23,4 +23,13 @@ mod tests {
         assert_eq!(res.unwrap().cast_bool().unwrap(), true);
     }
 
+    #[test]
+    fn test_register_classifier_train_from_file() {
+        let mut bund = Bund::new();
+        let _ = init_lib(&mut bund);
+        let _ = bund.eval(":TEST :rust './tests/rust.txt' textclassifier.train.from_file");
+        let res = bund.vm.stack.pull();
+        assert_eq!(res.unwrap().cast_int().unwrap(), 88 as i64);
+    }
+
 }

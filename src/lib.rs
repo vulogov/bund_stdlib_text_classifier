@@ -22,6 +22,7 @@ lazy_static! {
 pub fn init_lib(vm: &mut Bund) -> Result<&Bund, Error> {
     let _ = vm.vm.register_inline("textclassifier.new".to_string(), textclassifier_new);
     let _ = vm.vm.register_inline("textclassifier.exists".to_string(), textclassifier_exists);
+    let _ = vm.vm.register_inline("textclassifier.train.from_file".to_string(), textclassifier_train_from_file);
     Ok(vm)
 }
 
