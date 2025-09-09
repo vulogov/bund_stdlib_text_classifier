@@ -70,7 +70,7 @@ pub fn textclassifier_exists(vm: &mut VM) -> std::result::Result<&mut VM, Error>
 
 
 pub fn textclassifier_train_from_file(vm: &mut VM) -> std::result::Result<&mut VM, Error> {
-    if vm.stack.current_stack_len() < 2 {
+    if vm.stack.current_stack_len() < 3 {
         bail!("Stack is too shallow for inline TEXTCLASSIFIER.TRAIN.FROM_FILE");
     }
 
@@ -113,12 +113,58 @@ pub fn textclassifier_train_from_file(vm: &mut VM) -> std::result::Result<&mut V
     let mut c = match TEXTCLASSIFIERS.lock() {
         Ok(c) => c,
         Err(err) => {
-            bail!("textclassifier.exist can not obtain the lock: {}", err);
+            bail!("textclassifier.train.from_file can not obtain the lock: {}", err);
         }
     };
     let res =  c.classifier(cname.clone()).train_from_file(tname, fname);
     drop(c);
     vm.stack.push(Value::from_string(cname.clone()));
     vm.stack.push(Value::from_int(res as i64));
+    Ok(vm)
+}
+
+pub fn textclassifier_classify(vm: &mut VM) -> std::result::Result<&mut VM, Error> {
+    if vm.stack.current_stack_len() < 2 {
+        bail!("Stack is too shallow for inline TEXTCLASSIFIER.CLASSIFY");
+    }
+
+    let data_value = match vm.stack.pull() {
+        Some(data_value) => data_value,
+        None => bail!("TEXTCLASSIFIER: error getting data"),
+    };
+
+    let data = match data_value.cast_string() {
+        Ok(data) => data,
+        Err(err) => {
+            bail!("textclassifier.classify returned for #1: {}", err);
+        }
+    };
+
+    let name_value = match vm.stack.pull() {
+        Some(name_value) => name_value,
+        None => bail!("TEXTCLASSIFIER: error getting classifier name"),
+    };
+
+    let cname = match name_value.cast_string() {
+        Ok(cname) => cname,
+        Err(err) => {
+            bail!("textclassifier.classify returned for #1: {}", err);
+        }
+    };
+
+    let mut c = match TEXTCLASSIFIERS.lock() {
+        Ok(c) => c,
+        Err(err) => {
+            bail!("textclassifier.classify can not obtain the lock: {}", err);
+        }
+    };
+    let res =  c.classifier(cname.clone()).classify(data);
+    let mut ret = Value::dict();
+    drop(c);
+    for (key, val) in res.iter() {
+        ret = ret.set(key, Value::from_float(*val as f64));
+    }
+    vm.stack.push(Value::from_string(cname.clone()));
+    vm.stack.push(ret);
     Ok(vm)
 }
