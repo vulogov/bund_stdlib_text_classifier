@@ -31,6 +31,7 @@ pub fn textclassifier_new(vm: &mut VM) -> std::result::Result<&mut VM, Error> {
     };
     if c.classifier_exists(cname.clone()) {
         drop(c);
+        vm.stack.push(Value::from_string(cname.clone()));
         return Ok(vm);
     }
     let _ = c.classifier(cname.clone());
@@ -64,6 +65,7 @@ pub fn textclassifier_exists(vm: &mut VM) -> std::result::Result<&mut VM, Error>
     };
     let res =  c.classifier_exists(cname.clone());
     drop(c);
+    vm.stack.push(Value::from_string(cname.clone()));
     vm.stack.push(Value::from_bool(res));
     Ok(vm)
 }
@@ -82,7 +84,7 @@ pub fn textclassifier_train_from_file(vm: &mut VM) -> std::result::Result<&mut V
     let fname = match fname_value.cast_string() {
         Ok(fname) => fname,
         Err(err) => {
-            bail!("textclassifier.train.from_file returned for #1: {}", err);
+            bail!("textclassifier.train.from_file returned for #3: {}", err);
         }
     };
 
@@ -106,7 +108,8 @@ pub fn textclassifier_train_from_file(vm: &mut VM) -> std::result::Result<&mut V
     let cname = match name_value.cast_string() {
         Ok(cname) => cname,
         Err(err) => {
-            bail!("textclassifier.exists returned for #1: {}", err);
+            println!("{:?}", &name_value);
+            bail!("textclassifier.train.from_file returned for #1: {}", err);
         }
     };
 
