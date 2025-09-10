@@ -51,4 +51,8 @@ The following call will return a DICT value:
 
 | Name | Stack IN | Stack OUT | Description |
 |------|----------|-----------|-------------|
-| textclassifier.new | Classifier name<br/> | Classifier name<br/> | Create new classifier |
+| textclassifier.new | `Classifier name`<br/> | `Classifier name`<br/> | Create new classifier |
+| textclassifier.exists | `Classifier name`<br/> | `Classifier name`<br/>`TRUE/FALSE` | Check if classifier exists |
+| textclassifier.train.from_file | `Classifier name`<br/>`Category`<br/>`Filename` | `Classifier name`<br/>`Number of tokens` | Train classifier from text file |
+| textclassifier.train.finish | `Classifier name`<br/> | `Classifier name`<br/> | Finalize classifier training |
+| textclassifier.classify | `Classifier name`<br/>`Text for classification` | `Classifier name`<br/>`DICT with scores` | Classify text string using pre-trained classifier |
