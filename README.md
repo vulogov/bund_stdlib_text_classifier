@@ -50,6 +50,5 @@ The following call will return a DICT value:
 ## BUND functions exposed in this module
 
 | Name | Stack IN | Stack OUT | Description |
-|===========================================|
-| textclassifier.new | - Classifier name | - Classifier name | Create new classifier |
-|===========================================|
+|------|----------|-----------|-------------|
+| textclassifier.new | Classifier name<br/> | Classifier name<br/> | Create new classifier |
