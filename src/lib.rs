@@ -24,6 +24,7 @@ pub fn init_lib(vm: &mut Bund) -> Result<&Bund, Error> {
     let _ = vm.vm.register_inline("textclassifier.exists".to_string(), textclassifier_exists);
     let _ = vm.vm.register_inline("textclassifier.train.from_file".to_string(), textclassifier_train_from_file);
     let _ = vm.vm.register_inline("textclassifier.train.finish".to_string(), textclassifier_train_finish);
+    let _ = vm.vm.register_inline("textclassifier.classify".to_string(), textclassifier_classify);
     Ok(vm)
 }
 
