@@ -183,7 +183,7 @@ dependencies = [
 
 [[package]]
 name = "bund_stdlib_text_classifier"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "bayesic",
  "bundcore",
