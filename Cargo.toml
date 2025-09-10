@@ -1,7 +1,13 @@
 [package]
 name = "bund_stdlib_text_classifier"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
+description = "Text classification using Bayes classifier for BUND programming language"
+license-file = "LICENSE"
+repository = "https://github.com/vulogov/bund_stdlib_text_classifier"
+categories = ["compilers"]
+keywords = ["language", "stack", "concatenative", "lambda", "dynamic"]
+exclude = ["examples", "Models", "Documentation", ".*"]
 
 [dependencies]
 bayesic = "0.1.1"
